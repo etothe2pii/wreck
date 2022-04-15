@@ -154,7 +154,7 @@ class SqNode:
 class AltNode:
     def __init__(self, children):
         self.name = "ALT"
-        self.children = children.coipy()
+        self.children = children.copy()
 
     def nodeFunction(self, src, dest, lt_table):
         for child in self.children:
