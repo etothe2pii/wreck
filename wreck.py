@@ -349,7 +349,7 @@ if __name__ == '__main__':
     
     cfg = CFG()
     cfg = cfg.from_file("llre.cfg")
-    lambda_char = "x00"
+    lambda_char = "x01"
     while(lambda_char in escaped_symbols):
         lambda_char = int(lambda_char[1:])
         lambda_char += 1
