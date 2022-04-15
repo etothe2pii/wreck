@@ -206,6 +206,13 @@ def cst_to_ast (root_node, symbols):
         new_children = []
         for i in range(len( root_node.children)):
             new_children =  new_children + cst_to_ast(root_node.children[i], symbols)
+        if len(new_children) > 1:
+            i = 0
+            while i < len(new_children):
+                if(new_children[i].name == "lambda"):
+                    new_children.pop(i)
+                    i -= 1
+                i += 1
 
         if len(new_children) == 1:
             return new_children
