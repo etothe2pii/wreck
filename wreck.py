@@ -163,7 +163,7 @@ class AltNode:
 
 class KleeneNode:
     def __init__(self, children):
-        self.name = "KLEEN"
+        self.name = "KLEENE"
         self.children = children.copy()
 
     def nodeFunction(self, src, dest, lt_table):
@@ -181,6 +181,14 @@ class SymbolNode:
 
     def nodeFunction(self, src, dest, lt_table):
         lt_table.add_transition(self.symbol, src, dest)
+
+class LambdaNode:
+    def __init__(self):
+        self.name = "lambda"
+        self.children = []
+
+    def nodeFunction(self, src, dest, lt_table):
+        lt_table.add_lambda(src, dest)
 
 def force_escape(character):
 
@@ -248,12 +256,12 @@ def cst_to_ast (root_node, symbols):
             children_out = children_out + cst_to_ast(root_node.children[i], symbols )
         
         return children_out
-
+    elif(root_node.name == "lambda"):
+        return [LambdaNode()]
     elif(root_node.name in symbols):
         return [SymbolNode(root_node.name)]
     else:
         return []
-
     
 def force_char(s):
     if(len(s) == 1):
