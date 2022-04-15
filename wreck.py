@@ -142,10 +142,11 @@ class SqNode:
         self.children = children.copy()
 
     def nodeFunction(self, src, dest, lt_table):
+        inner_node = src
         for child in self.children:
             child_dest = lt_table.add_state()
-            child.nodeFunction(src,child_dest, lt_table)
-            src = lt_table.add_state()
+            child.nodeFunction(inner_node,child_dest, lt_table)
+            inner_node = child_dest
             lt_table.add_lambda(child_dest, src)
 
         lt_table.add_lambda(src, dest)
