@@ -302,7 +302,7 @@ class CFG:
                     escaped = True
                 elif(input_string[i+1] == "\\"):
                     input_stack.append('\\')
-                    escaped = False
+                    escaped = True
                 else:
                     input_stack.append("\\" + input_string[i+1])
                     escaped = True
