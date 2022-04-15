@@ -331,6 +331,8 @@ class CFG:
             if(rule_stack[0] == "endofproduction"):
                 current_node = current_node.parent
                 rule_stack.pop(0)
+            elif(len(input_stack) == 0 ):
+                sys.exit(2)
             elif((input_stack[0] in symbols and rule_stack[0] == "char") or rule_stack[0] == input_stack[0]):
                 current_node.children.append(TreeNode(name = input_stack[0],parent = current_node))
                 rule_stack.pop(0)
