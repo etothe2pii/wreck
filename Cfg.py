@@ -329,8 +329,6 @@ class CFG:
         input_stack.append("$")
         print(table)
         while(not len(rule_stack) == 0):
-            print(input_stack)
-            print(rule_stack)
             if(rule_stack[0] == "endofproduction"):
                 current_node = current_node.parent
                 rule_stack.pop(0)
