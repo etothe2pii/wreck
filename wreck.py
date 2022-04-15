@@ -1,5 +1,6 @@
 import sys
 from Cfg import *
+from to_graphviz import * 
 
 class L_dest:
     def __init__(self, size, accepting):
@@ -198,7 +199,6 @@ def cst_to_ast (root_node, symbols):
         for i in range(len( root_node.children)):
             new_children =  new_children + cst_to_ast(root_node.children[i], symbols)
 
-        root_node.children = new_children
         if len(new_children) == 1:
             return new_children
         if root_node.name == "ALT":
@@ -245,7 +245,7 @@ def cst_to_ast (root_node, symbols):
         children_out = [] 
         for i in range(len(root_node.children)):
 
-            children_out = cst_to_ast(root_node.children[i], symbols ) + children_out
+            children_out = children_out + cst_to_ast(root_node.children[i], symbols )
         
         return children_out
 
@@ -319,11 +319,11 @@ if __name__ == '__main__':
         else:
             lambda_char = "x0" + str(lambda_char)
 
-    
-    print("LAMBDA: ", lambda_char)
     for expression in input_src: 
         root_node = cfg.parse_tree(expression[0], symbols)
+        to_graphviz(root_node, expression[1] + ".dot")
         root_node = cst_to_ast(root_node, symbols)[0]
+        to_graphviz(root_node, expression[1] + "ast.dot")
         table = LT_tables(symbols)
 
         root_node.nodeFunction(0,1,table)
