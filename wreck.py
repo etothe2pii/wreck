@@ -167,10 +167,21 @@ class KleeneNode:
         self.children = children.copy()
 
     def nodeFunction(self, src, dest, lt_table):
-        lt_table.add_lambda(src, dest)
+        
+        dummy_node = lt_table.add_state()
 
+        lt_table.add_lambda(src, dummy_node)
+
+        dummy_node_end = lt_table.add_state()
+
+        lt_table.add_lambda(dummy_node_end, dummy_node)
+        lt_table.add_lambda(dummy_node, dummy_node_end)
+        lt_table.add_lambda(dummy_node_end, dest)
+        
+
+        
         for child in self.children:
-            child.nodeFunction(src,src, lt_table)
+            child.nodeFunction(dummy_node,dummy_node_end, lt_table)
 
 class SymbolNode:
     def __init__(self, symbol):
@@ -346,7 +357,9 @@ if __name__ == '__main__':
         else:
             lambda_char = "x0" + str(lambda_char)
 
-    for expression in input_src: 
+    for expression in input_src:
+    
+
         root_node = cfg.parse_tree(expression[0], symbols)
         to_graphviz(root_node, expression[1] + ".dot")
         root_node = cst_to_ast(root_node, symbols)[0]
