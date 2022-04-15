@@ -138,11 +138,13 @@ class LT_tables:
 class SqNode:
 
     def __init__(self, children):
+
         self.name = "SEQ"
         self.children = children.copy()
 
     def nodeFunction(self, src, dest, lt_table):
-        inner_node = src
+        inner_node = lt_table.add_state()
+        lt_table.add_lambda(src, inner_node)
         for child in self.children:
             child_dest = lt_table.add_state()
             child.nodeFunction(inner_node,child_dest, lt_table)
@@ -158,7 +160,9 @@ class AltNode:
 
     def nodeFunction(self, src, dest, lt_table):
         for child in self.children:
+            print("ALT NODE: ", src, dest)
             child.nodeFunction(src,dest, lt_table)
+            print("END ALT: ", src, dest)
 
 
 class KleeneNode:
