@@ -1,0 +1,9 @@
+#!/bin/bash
+
+i=1;
+arr=()
+for user in "$@" 
+do
+	arr+=("$user");
+done
+python3 wreck.py "${arr[@]}"
