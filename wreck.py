@@ -148,7 +148,7 @@ class SqNode:
             child.nodeFunction(inner_node,child_dest, lt_table)
             inner_node = child_dest
 
-        lt_table.add_lambda(src, dest)
+        lt_table.add_lambda(inner_node, dest)
 
 
 class AltNode:
