@@ -202,24 +202,29 @@ def force_escape(character):
     return "x" + hex_char
 
 def cst_to_ast (root_node, symbols):
+
     if(root_node.name == "ALT" or root_node.name == "SEQ"):
         new_children = []
         for i in range(len( root_node.children)):
             new_children =  new_children + cst_to_ast(root_node.children[i], symbols)
+        
+        
         if len(new_children) > 1:
             i = 0
-            while i < len(new_children):
+            while i < len(new_children) and len(new_children) != 1:
                 if(new_children[i].name == "lambda"):
                     new_children.pop(i)
                     i -= 1
                 i += 1
-
         if len(new_children) == 1:
             return new_children
         if root_node.name == "ALT":
             return [AltNode(new_children)]
         else:
-            return [SqNode(new_children)]
+            if (len(new_children) == 0):
+                return [SqNode([LambdaNode()])]
+            else:
+                return [SqNode(new_children)]
 
 
     
@@ -263,8 +268,8 @@ def cst_to_ast (root_node, symbols):
             children_out = children_out + cst_to_ast(root_node.children[i], symbols )
         
         return children_out
-    elif(root_node.name == "lambda"):
-        return [LambdaNode()]
+    #elif(root_node.name == "lambda"):
+     #   return [LambdaNode()]
     elif(root_node.name in symbols):
         return [SymbolNode(root_node.name)]
     else:
