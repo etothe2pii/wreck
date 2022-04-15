@@ -194,7 +194,9 @@ def force_escape(character):
 
     if(len(character) == 3):
         return character
-    
+    if(len(character) == 2):
+        character = character[1:]
+
     hex_char = str(hex(ord(character)))[2:]
     if(len(hex_char) == 1):
         hex_char = "0"+ hex_char
