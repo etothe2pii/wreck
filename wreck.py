@@ -298,7 +298,7 @@ if __name__ == '__main__':
 
     output_file.write(tmp_symbols + "\n")
 
-
+    forbidden_symbols = ["+", "|", "(", ")", "*", "."]
     symbols = []
     
     index = 0
@@ -311,11 +311,16 @@ if __name__ == '__main__':
             index += 1
         else:
             index += 1
+   
     
     escaped_symbols = []
 
     for s in symbols:
         escaped_symbols.append( force_escape(s))
+
+    for i in range(len(symbols)):
+        if symbols[i] in forbidden_symbols :
+            symbols[i] = "\\" + symbols[i]
 
     for i in range(len(input_src)):
         input_src[i] = input_src[i].split()

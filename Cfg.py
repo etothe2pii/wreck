@@ -291,7 +291,7 @@ class CFG:
         input_stack = []
         rule_stack = [self.start_symbol]
         escaped = False
-
+        input_string = list(input_string)
         for i in range(len(input_string)):
             if input_string[i] == "\\":
                 if(input_string[i+1] == "n"):
@@ -303,6 +303,9 @@ class CFG:
                 elif(input_string[i+1] == "\\"):
                     input_stack.append('\\')
                     escaped = False
+                else:
+                    input_stack.append("\\" + input_string[i+1])
+                    escaped = True
             elif (not escaped):
                 if(input_string[i] == "|"):
                     input_stack.append("pipe")
