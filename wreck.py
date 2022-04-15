@@ -257,7 +257,7 @@ def cst_to_ast (root_node, symbols):
         
         return children_out
     elif(root_node.name == "lambda"):
-        return [SymbolNode(root_node.name)]
+        return [LambdaNode()]
     elif(root_node.name in symbols):
         return [SymbolNode(root_node.name)]
     else:
