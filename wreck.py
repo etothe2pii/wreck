@@ -323,7 +323,7 @@ if __name__ == '__main__':
     for i in range(len(symbols)):
         if symbols[i] in forbidden_symbols :
             symbols[i] = "\\" + symbols[i]
-
+    print(symbols)
     for i in range(len(input_src)):
         input_src[i] = input_src[i].split()
 
