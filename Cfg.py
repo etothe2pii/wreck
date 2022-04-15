@@ -315,7 +315,7 @@ class CFG:
                 elif(input_string[i] == "+"):
                     input_stack.append("plus")
                 elif(input_string[i] == "-"):
-                    input_stack.append("range")
+                    input_stack.append("dash")
                 elif(input_string[i] == "."):
                     input_stack.append("dot")
                 elif(input_string[i] in symbols):
