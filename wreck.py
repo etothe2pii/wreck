@@ -1,6 +1,5 @@
 import sys
 from Cfg import *
-from to_graphviz import *
 
 class L_dest:
     def __init__(self, size, accepting):
@@ -324,13 +323,10 @@ if __name__ == '__main__':
     print("LAMBDA: ", lambda_char)
     for expression in input_src: 
         root_node = cfg.parse_tree(expression[0], symbols)
-
-        to_graphviz(root_node, expression[1] + "parse.dot")
         root_node = cst_to_ast(root_node, symbols)[0]
         table = LT_tables(symbols)
 
         root_node.nodeFunction(0,1,table)
-        to_graphviz(root_node, expression[1] + "ast.dot")
                 
         token_file = open(expression[1] + ".nfa", "w")
 
