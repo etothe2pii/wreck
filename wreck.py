@@ -1,6 +1,6 @@
 import sys
 from Cfg import *
-from to_graphviz import * 
+#from to_graphviz import * 
 
 class L_dest:
     def __init__(self, size, accepting):
@@ -160,9 +160,7 @@ class AltNode:
 
     def nodeFunction(self, src, dest, lt_table):
         for child in self.children:
-            print("ALT NODE: ", src, dest)
             child.nodeFunction(src,dest, lt_table)
-            print("END ALT: ", src, dest)
 
 
 class KleeneNode:
@@ -338,7 +336,6 @@ if __name__ == '__main__':
     for i in range(len(symbols)):
         if symbols[i] in forbidden_symbols :
             symbols[i] = "\\" + symbols[i]
-    print(symbols)
     for i in range(len(input_src)):
         input_src[i] = input_src[i].split()
 
@@ -365,9 +362,9 @@ if __name__ == '__main__':
     
 
         root_node = cfg.parse_tree(expression[0], symbols)
-        to_graphviz(root_node, expression[1] + ".dot")
+        #to_graphviz(root_node, expression[1] + ".dot")
         root_node = cst_to_ast(root_node, symbols)[0]
-        to_graphviz(root_node, expression[1] + "ast.dot")
+        #to_graphviz(root_node, expression[1] + "ast.dot")
         table = LT_tables(symbols)
 
         root_node.nodeFunction(0,1,table)

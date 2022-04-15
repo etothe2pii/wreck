@@ -324,15 +324,12 @@ class CFG:
                 elif(input_string[i] in symbols):
                     input_stack.append(input_string[i])
                 else:
-                    print("EXITING WITH ERROR CODE 2")
                     sys.exit(2)
             elif(escaped):
                 escaped = False
 
         input_stack.append("$")
         while(not len(rule_stack) == 0):
-            print(rule_stack)
-            print(input_stack)
             if(rule_stack[0] == "endofproduction"):
                 current_node = current_node.parent
                 rule_stack.pop(0)
@@ -363,7 +360,6 @@ class CFG:
                 tmp_stack.append("endofproduction")
                 rule_stack = tmp_stack + rule_stack
             else:
-                print("EXIT 2")
                 sys.exit(2)
                 
 
