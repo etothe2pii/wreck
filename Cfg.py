@@ -327,7 +327,10 @@ class CFG:
                 escaped = False
 
         input_stack.append("$")
+        print(table)
         while(not len(rule_stack) == 0):
+            print(input_stack)
+            print(rule_stack)
             if(rule_stack[0] == "endofproduction"):
                 current_node = current_node.parent
                 rule_stack.pop(0)
@@ -340,6 +343,8 @@ class CFG:
             elif(rule_stack[0] == "lambda"):
                 current_node.children.append(TreeNode(name = "lambda", parent = current_node))
                 rule_stack.pop(0)
+            elif(len(input_stack) == 1 and rule_stack[0] != input_stack[0] and not rule_stack[0] in table):
+                sys.exit(2)
             elif((input_stack[0] in symbols and "char" in table[rule_stack[0]].keys()) or input_stack[0] in table[rule_stack[0]].keys()):
                 if input_stack[0] in symbols:
                     rule_number = table[rule_stack[0]]["char"]
