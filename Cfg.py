@@ -293,7 +293,7 @@ class CFG:
         escaped = False
         input_string = list(input_string)
         for i in range(len(input_string)):
-            if input_string[i] == "\\":
+            if input_string[i] == "\\" and not escaped:
                 if(input_string[i+1] == "n"):
                     input_stack.append('\n')
                     escaped = True
